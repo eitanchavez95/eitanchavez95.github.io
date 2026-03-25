@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps Engineer Portfolio</title>
+  <meta name="description" content="DevOps Engineer specializing in cloud infrastructure, containerization, and CI/CD pipelines.">
+  <style>
+    :root {
+      --bg-primary: #0a0a0b;
+      --bg-secondary: #111113;
+      --bg-tertiary: #18181b;
+      --bg-card: #141416;
+      --border-color: #27272a;
+      --border-hover: #3f3f46;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent-primary: #22c55e;
+      --accent-secondary: #16a34a;
+      --accent-tertiary: #15803d;
+      --accent-glow: rgba(34, 197, 94, 0.15);
+      --status-warning: #f59e0b;
+      --status-error: #ef4444;
+      --status-info: #3b82f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 11, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      padding: 0 24px;
+    }
+
+    .navbar-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 56px;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .navbar-logo svg {
+      color: var(--accent-primary);
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .navbar-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 140px 0 80px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--accent-primary);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero-description {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-secondary);
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card);
+    }
+
+    .hero-terminal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ef4444; }
+    .terminal-dot.yellow { background: #f59e0b; }
+    .terminal-dot.green { background: #22c55e; }
+
+    .terminal-title {
+      margin-left: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .terminal-line {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .terminal-prompt {
+      color: var(--accent-primary);
+    }
+
+    .terminal-command {
+      color: var(--text-primary);
+    }
+
+    .terminal-output {
+      color: var(--text-secondary);
+      padding-left: 20px;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    /* Skills Dashboard */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .skill-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent-tertiary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+    }
+
+    .skill-card-badge {
+      font-size: 11px;
+      padding: 4px 8px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .skill-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      font-size: 12px;
+      padding: 6px 12px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .project-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .project-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--accent-primary);
+    }
+
+    .project-status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+    }
+
+    .project-body {
+      padding: 24px;
+    }
+
+    .project-description {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .project-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .project-meta-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      min-width: 80px;
+    }
+
+    .project-tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tech-tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+
+    /* JD Analyzer */
+    .analyzer-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .analyzer-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .analyzer-panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .analyzer-panel-title {
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .analyzer-panel-title svg {
+      color: var(--accent-primary);
+    }
+
+    .analyzer-panel-body {
+      padding: 20px;
+    }
+
+    .analyzer-textarea {
+      width: 100%;
+      min-height: 300px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text-primary);
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+
+    .analyzer-textarea:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+
+    .analyzer-textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .analyzer-actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .analyzer-results {
+      min-height: 300px;
+    }
+
+    .analyzer-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .analyzer-empty svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+
+    .analyzer-empty p {
+      font-size: 13px;
+    }
+
+    .match-score {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .match-score-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .match-score-circle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px solid var(--border-color);
+    }
+
+    .match-score-circle.high {
+      color: var(--accent-primary);
+    }
+
+    .match-score-circle.high::before {
+      border-color: var(--accent-primary);
+    }
+
+    .match-score-circle.medium {
+      color: var(--status-warning);
+    }
+
+    .match-score-circle.medium::before {
+      border-color: var(--status-warning);
+    }
+
+    .match-score-circle.low {
+      color: var(--status-error);
+    }
+
+    .match-score-circle.low::before {
+      border-color: var(--status-error);
+    }
+
+    .match-score-info h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .match-score-info p {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .skills-section {
+      margin-bottom: 20px;
+    }
+
+    .skills-section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skills-section-title.matched svg {
+      color: var(--accent-primary);
+    }
+
+    .skills-section-title.missing svg {
+      color: var(--status-warning);
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-item {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .skill-item.matched {
+      background: var(--accent-glow);
+      border: 1px solid var(--accent-tertiary);
+      color: var(--accent-primary);
+    }
+
+    .skill-item.missing {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--status-warning);
+    }
+
+    .analysis-explanation {
+      padding: 16px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-primary);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .analyzer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-links {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border-color);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Fade in animation */
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <a href="#" class="navbar-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        devops.portfolio
+      </a>
+      <ul class="navbar-links">
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#analyzer">JD Analyzer</a></li>
+      </ul>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        Available for opportunities
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-info">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            System Status: All services operational
+          </div>
+          <h1 class="hero-title">Your Name</h1>
+          <p class="hero-subtitle">DevOps Engineer</p>
+          <p class="hero-description">
+            Building resilient, scalable infrastructure and automating everything in between. 
+            Specializing in cloud-native architectures, container orchestration, and CI/CD pipelines 
+            that ship code faster and more reliably.
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              View Projects
+            </a>
+            <a href="#analyzer" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              Analyze JD Match
+            </a>
+          </div>
+        </div>
+        <div class="hero-terminal">
+          <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">~/portfolio — zsh</span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-command">kubectl get pods -n production</span>
+            </div>
+            <div class="terminal-output">NAME                    READY   STATUS    RESTARTS</div>
+            <div class="terminal-output">api-7d9f8b6c5-x2k4j    1/1     Running   0</div>
+            <div class="terminal-output">web-5c8d7b4a3-m9n8p    1/1     Running   0</div>
+            <div class="terminal-output">worker-3f6e5d2c1-q7w8e  1/1     Running   0</div>
+            <br>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-command">terraform plan</span>
+            </div>
+            <div class="terminal-output">Plan: 0 to add, 0 to change, 0 to destroy.</div>
+            <br>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-command">echo "Infrastructure as Code"</span>
+            </div>
+            <div class="terminal-output">Infrastructure as Code</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Dashboard -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Skills Dashboard</h2>
+      </div>
+      <div class="skills-grid">
+        <!-- Cloud Platforms -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+              </svg>
+            </div>
+            <span class="skill-card-badge">Primary</span>
+          </div>
+          <h3 class="skill-card-title">Cloud Platforms</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">GCP</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">DigitalOcean</span>
+          </div>
+        </div>
+
+        <!-- Containers & Orchestration -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+            </div>
+            <span class="skill-card-badge">Expert</span>
+          </div>
+          <h3 class="skill-card-title">Containers & Orchestration</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">Helm</span>
+            <span class="skill-tag">ECS</span>
+            <span class="skill-tag">Podman</span>
+          </div>
+        </div>
+
+        <!-- Infrastructure as Code -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <span class="skill-card-badge">Expert</span>
+          </div>
+          <h3 class="skill-card-title">Infrastructure as Code</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Terraform</span>
+            <span class="skill-tag">Pulumi</span>
+            <span class="skill-tag">CloudFormation</span>
+            <span class="skill-tag">Ansible</span>
+            <span class="skill-tag">Crossplane</span>
+          </div>
+        </div>
+
+        <!-- CI/CD -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <span class="skill-card-badge">Primary</span>
+          </div>
+          <h3 class="skill-card-title">CI/CD Pipelines</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">GitLab CI</span>
+            <span class="skill-tag">Jenkins</span>
+            <span class="skill-tag">ArgoCD</span>
+            <span class="skill-tag">CircleCI</span>
+          </div>
+        </div>
+
+        <!-- Observability -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            <span class="skill-card-badge">Primary</span>
+          </div>
+          <h3 class="skill-card-title">Observability</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Prometheus</span>
+            <span class="skill-tag">Grafana</span>
+            <span class="skill-tag">Datadog</span>
+            <span class="skill-tag">ELK Stack</span>
+            <span class="skill-tag">Jaeger</span>
+          </div>
+        </div>
+
+        <!-- Scripting & Tools -->
+        <div class="skill-card">
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 17 10 11 4 5"/>
+                <line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+            </div>
+            <span class="skill-card-badge">Daily</span>
+          </div>
+          <h3 class="skill-card-title">Scripting & Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Bash</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Go</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Linux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Projects</h2>
+      </div>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              Multi-Cloud Kubernetes Platform
+            </h3>
+            <span class="project-status">
+              <span class="project-status-dot"></span>
+              Active
+            </span>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Built a unified Kubernetes management platform spanning AWS EKS, GCP GKE, and Azure AKS. 
+              Implemented GitOps workflows with ArgoCD for consistent deployments across all clusters 
+              with automated failover and cross-region disaster recovery.
+            </p>
+            <div class="project-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Stack</span>
+                <div class="project-tech-tags">
+                  <span class="project-tech-tag">Kubernetes</span>
+                  <span class="project-tech-tag">Terraform</span>
+                  <span class="project-tech-tag">ArgoCD</span>
+                  <span class="project-tech-tag">Prometheus</span>
+                </div>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Architecture</span>
+                <span style="font-size: 12px; color: var(--text-secondary);">Hub-spoke topology with centralized monitoring</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              Zero-Downtime CI/CD Pipeline
+            </h3>
+            <span class="project-status">
+              <span class="project-status-dot"></span>
+              Active
+            </span>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Designed and implemented a complete CI/CD system supporting blue-green and canary deployments. 
+              Integrated automated security scanning, load testing, and rollback capabilities. 
+              Reduced deployment time from 2 hours to 15 minutes with 99.99% success rate.
+            </p>
+            <div class="project-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Stack</span>
+                <div class="project-tech-tags">
+                  <span class="project-tech-tag">GitHub Actions</span>
+                  <span class="project-tech-tag">Docker</span>
+                  <span class="project-tech-tag">Helm</span>
+                  <span class="project-tech-tag">Istio</span>
+                </div>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Architecture</span>
+                <span style="font-size: 12px; color: var(--text-secondary);">Service mesh with progressive delivery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              Infrastructure Cost Optimizer
+            </h3>
+            <span class="project-status">
+              <span class="project-status-dot"></span>
+              Active
+            </span>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Developed an automated cost optimization system that analyzes cloud resource usage patterns 
+              and implements right-sizing recommendations. Includes spot instance management, 
+              reserved instance purchasing automation, and idle resource cleanup.
+            </p>
+            <div class="project-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Stack</span>
+                <div class="project-tech-tags">
+                  <span class="project-tech-tag">Python</span>
+                  <span class="project-tech-tag">AWS Lambda</span>
+                  <span class="project-tech-tag">CloudWatch</span>
+                  <span class="project-tech-tag">Grafana</span>
+                </div>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Architecture</span>
+                <span style="font-size: 12px; color: var(--text-secondary);">Event-driven serverless architecture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              Observability Stack Migration
+            </h3>
+            <span class="project-status">
+              <span class="project-status-dot"></span>
+              Active
+            </span>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Led migration from legacy monitoring to a modern observability stack. Implemented 
+              distributed tracing, centralized logging, and custom metrics collection across 
+              200+ microservices. Created unified dashboards and alerting with PagerDuty integration.
+            </p>
+            <div class="project-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Stack</span>
+                <div class="project-tech-tags">
+                  <span class="project-tech-tag">Prometheus</span>
+                  <span class="project-tech-tag">Grafana</span>
+                  <span class="project-tech-tag">Loki</span>
+                  <span class="project-tech-tag">Tempo</span>
+                </div>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Architecture</span>
+                <span style="font-size: 12px; color: var(--text-secondary);">Unified telemetry pipeline with OpenTelemetry</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JD Match Analyzer -->
+  <section id="analyzer" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">JD Match Analyzer</h2>
+      </div>
+      <div class="analyzer-container">
+        <div class="analyzer-panel">
+          <div class="analyzer-panel-header">
+            <h3 class="analyzer-panel-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              Job Description Input
+            </h3>
+          </div>
+          <div class="analyzer-panel-body">
+            <textarea 
+              id="jd-input" 
+              class="analyzer-textarea" 
+              placeholder="Paste a job description here to analyze how well your skills match the requirements...
+
+Example:
+- Looking for a DevOps Engineer with experience in AWS, Kubernetes, and Terraform
+- Must have CI/CD pipeline experience with GitHub Actions or Jenkins
+- Experience with monitoring tools like Prometheus and Grafana
+- Strong scripting skills in Python or Bash"
+            ></textarea>
+            <div class="analyzer-actions">
+              <button id="analyze-btn" class="btn btn-primary" onclick="analyzeJD()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                Analyze Match
+              </button>
+              <button class="btn btn-secondary" onclick="clearAnalysis()">
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="analyzer-panel">
+          <div class="analyzer-panel-header">
+            <h3 class="analyzer-panel-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+              Analysis Results
+            </h3>
+          </div>
+          <div class="analyzer-panel-body">
+            <div id="analyzer-results" class="analyzer-results">
+              <div class="analyzer-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <p>Paste a job description and click "Analyze Match" to see how your skills align with the requirements.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+      <p class="footer-copy">Built with infrastructure-grade reliability</p>
+    </div>
+  </footer>
+
+  <script>
+    // Skills data for matching
+    const mySkills = {
+      cloud: ['aws', 'gcp', 'azure', 'digitalocean', 'cloud', 'ec2', 's3', 'lambda', 'eks', 'gke', 'aks'],
+      containers: ['docker', 'kubernetes', 'k8s', 'helm', 'ecs', 'podman', 'container', 'orchestration'],
+      iac: ['terraform', 'pulumi', 'cloudformation', 'ansible', 'crossplane', 'infrastructure as code', 'iac'],
+      cicd: ['github actions', 'gitlab ci', 'jenkins', 'argocd', 'circleci', 'ci/cd', 'cicd', 'pipeline', 'deployment'],
+      observability: ['prometheus', 'grafana', 'datadog', 'elk', 'elasticsearch', 'kibana', 'logstash', 'jaeger', 'monitoring', 'logging', 'tracing', 'observability', 'alerting'],
+      scripting: ['bash', 'python', 'go', 'golang', 'git', 'linux', 'shell', 'scripting', 'automation']
+    };
+
+    // Flatten skills for easy matching
+    const allSkills = Object.values(mySkills).flat();
+
+    function analyzeJD() {
+      const jdText = document.getElementById('jd-input').value.toLowerCase();
+      const resultsContainer = document.getElementById('analyzer-results');
+      const analyzeBtn = document.getElementById('analyze-btn');
+      
+      if (!jdText.trim()) {
+        alert('Please paste a job description first.');
+        return;
+      }
+
+      // Show loading state
+      analyzeBtn.innerHTML = '<span class="loading"></span> Analyzing...';
+      analyzeBtn.disabled = true;
+
+      // Simulate analysis delay
+      setTimeout(() => {
+        const matchedSkills = [];
+        const missingSkills = [];
+
+        // Common DevOps keywords to check
+        const commonKeywords = [
+          'aws', 'gcp', 'azure', 'cloud', 'docker', 'kubernetes', 'k8s', 
+          'terraform', 'ansible', 'jenkins', 'github actions', 'gitlab',
+          'prometheus', 'grafana', 'datadog', 'python', 'bash', 'go',
+          'ci/cd', 'linux', 'helm', 'argocd', 'infrastructure', 'monitoring',
+          'logging', 'security', 'networking', 'microservices', 'serverless',
+          'lambda', 'ecs', 'eks', 'gke', 'api', 'rest', 'agile', 'scrum'
+        ];
+
+        // Check which skills match
+        commonKeywords.forEach(keyword => {
+          if (jdText.includes(keyword)) {
+            const hasSkill = allSkills.some(skill => 
+              skill.includes(keyword) || keyword.includes(skill)
+            );
+            if (hasSkill) {
+              matchedSkills.push(keyword);
+            } else {
+              missingSkills.push(keyword);
+            }
+          }
+        });
+
+        // Calculate match score
+        const totalFound = matchedSkills.length + missingSkills.length;
+        const matchScore = totalFound > 0 ? Math.round((matchedSkills.length / totalFound) * 100) : 0;
+        
+        // Determine score class
+        let scoreClass = 'low';
+        let scoreLabel = 'Low Match';
+        if (matchScore >= 70) {
+          scoreClass = 'high';
+          scoreLabel = 'Strong Match';
+        } else if (matchScore >= 40) {
+          scoreClass = 'medium';
+          scoreLabel = 'Moderate Match';
+        }
+
+        // Generate explanation
+        let explanation = '';
+        if (matchScore >= 70) {
+          explanation = `Excellent fit! Your skills strongly align with this role's requirements. You have experience with most of the key technologies mentioned, particularly in ${matchedSkills.slice(0, 3).join(', ')}.`;
+        } else if (matchScore >= 40) {
+          explanation = `Good potential match. You have relevant experience in several areas. Consider highlighting your ${matchedSkills.slice(0, 2).join(' and ')} experience, and look into gaining exposure to ${missingSkills.slice(0, 2).join(' and ')}.`;
+        } else {
+          explanation = `This role may require skills outside your current expertise. Consider this as a stretch opportunity or focus on building skills in ${missingSkills.slice(0, 3).join(', ')} before applying.`;
+        }
+
+        // Render results
+        resultsContainer.innerHTML = `
+          <div class="fade-in">
+            <div class="match-score">
+              <div class="match-score-circle ${scoreClass}">${matchScore}%</div>
+              <div class="match-score-info">
+                <h4>${scoreLabel}</h4>
+                <p>${matchedSkills.length} of ${totalFound} requirements matched</p>
+              </div>
+            </div>
+            
+            ${matchedSkills.length > 0 ? `
+            <div class="skills-section">
+              <h4 class="skills-section-title matched">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Matched Skills
+              </h4>
+              <div class="skills-list">
+                ${matchedSkills.map(skill => `<span class="skill-item matched">${skill}</span>`).join('')}
+              </div>
+            </div>
+            ` : ''}
+            
+            ${missingSkills.length > 0 ? `
+            <div class="skills-section">
+              <h4 class="skills-section-title missing">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                Skills to Develop
+              </h4>
+              <div class="skills-list">
+                ${missingSkills.map(skill => `<span class="skill-item missing">${skill}</span>`).join('')}
+              </div>
+            </div>
+            ` : ''}
+            
+            <div class="analysis-explanation">
+              <strong>Analysis:</strong> ${explanation}
+            </div>
+          </div>
+        `;
+
+        // Reset button
+        analyzeBtn.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Analyze Match
+        `;
+        analyzeBtn.disabled = false;
+      }, 800);
+    }
+
+    function clearAnalysis() {
+      document.getElementById('jd-input').value = '';
+      document.getElementById('analyzer-results').innerHTML = `
+        <div class="analyzer-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <p>Paste a job description and click "Analyze Match" to see how your skills align with the requirements.</p>
+        </div>
+      `;
+    }
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
