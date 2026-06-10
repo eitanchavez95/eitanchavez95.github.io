@@ -1,0 +1,23 @@
+To-Do List combinado – Mejora de portfolio DevOps
+Contenido y estructura
+ Integrar sección de blogs o artículos (puede ser desde LinkedIn o Medium) como Janus Chung.
+ Tener secciones claras: About / Skills / Projects / Analyzer / Contact.
+ Incluir proyectos destacados con stack y descripción clara, como ambos portfolios.
+ Skills presentadas con tags visuales y categorías, fácil de escanear (inspirado en Sameer).
+ Footer con contacto y redes sociales visibles y consistentes.
+Visual y UI
+ Diseño consistente y atractivo: colores, tipografía y espacio negativo equilibrados (Sameer).
+ Uso de hover effects y transiciones sutiles en botones y cards (Sameer).
+ Secciones con animaciones al hacer scroll (fade-in, slide-in, etc.).
+ Layout tipo dashboard para proyectos y skills, con grids responsivos.
+ Agregar favicon en la pestaña del navegador (como Janus Chung).
+ Navbar flotante con smooth scroll a secciones y estado activo destacado.
+Interactividad y funcionalidad
+ JD Analyzer u otras herramientas interactivas bien integradas (tu actual terminal / analyzer).
+ Mostrar status en tiempo real o disponibilidad (como la barra de “Available” en tu hero).
+ Posibilidad de filtrar proyectos por stack o categoría (inspiración Sameer).
+Optimización y profesionalismo
+ Responsive: móvil, tablet y desktop sin problemas.
+ SEO básico: título, meta description, alt en imágenes.
+ Carga rápida y optimización de imágenes y SVGs.
+ Accesibilidad básica: contraste de colores, focus states en inputs y botones.
